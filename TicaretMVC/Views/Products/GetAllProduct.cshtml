@@ -1,0 +1,40 @@
+﻿@using TicaretMVC.Models
+@*@model List<User>*@
+@model List<ProductsWithStore>
+
+@{
+    ViewData["Title"] = "GetAllProduct";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Mağaza</th>
+        @*<th>Kategori</th>*@
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <th>@x.Id</th>
+            <td>@x.Name</td>
+            <td>@x.Quantity</td>
+            <td>@x.Price</td>
+            <td>@x.groupname</td>
+            @*<td>@x.KategoriName</td>*@
+            <td><a href="/Products/GetProduct?Id=@x.Id&Name=@x.Name&Quantity=@x.Quantity&Price=@x.Price&ImageUrl=@x.ImageUrl&Description=@x.Description&
+                   groupid=@x.groupid&groupname=@x.groupname@*&KategoriID=@x.KategoriID&KategoriName=@x.KategoriName*@" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Products/DetailProduct?Id=@x.Id&Name=@x.Name&Quantity=@x.Quantity&Price=@x.Price&
+                   Description=@x.Description&ImageUrl=@x.ImageUrl&groupid=@x.groupid&groupname=@x.groupname@*&KategoriID=@x.KategoriID&KategoriName=@x.KategoriName*@" class="btn btn-default" style="background-color:#ffd800">Detaylar</a></td>
+            <td><a href="/Products/ProductDelete?Id=@x.Id" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Products/NewProduct/" class="btn btn-primary">Yeni Ürün</a>

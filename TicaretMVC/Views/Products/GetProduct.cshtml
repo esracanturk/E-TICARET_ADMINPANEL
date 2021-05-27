@@ -1,0 +1,161 @@
+﻿@model TicaretMVC.Models.ProductsWithStore
+@{
+    ViewData["Title"] = "GetUser";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+<html>
+<head>
+    <link href="~/web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #84C639;
+            color: white;
+            padding: 8px 18px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            /*width: 15%;*/
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        .cancelbtn {
+            width: auto;
+            padding: 8px 18px;
+            background-color: red;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 4px;
+            width: auto
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+</html>
+<h1>Ürün Güncelleme Sayfası</h1>
+<form asp-controller="Products" asp-action="ProductUpdate" method="post" enctype="multipart/form-data">
+    <div>
+        @*<label for="Id">Ürün ID:</label>*@
+
+        <b><label for="Name">Ürünün Adı:</label></b>
+        <input type="text" id="Name" name="Name" value="@Model.Name" style="border: 2px solid grey"><br><br>
+
+        <b><label for="Quantity">Ürünün Miktarı:</label></b>
+        <input type="text" id="Quantity" name="Quantity"value="@Model.Quantity" style="border: 2px solid grey"><br><br>
+
+        <b><label for="Price">Ürünün Fiyatı:</label></b>
+        <input type="text" id="Price" name="Price"value="@Model.Price" style="border: 2px solid grey"><br><br>
+
+        @*<label for="Image">Ürünün Fotoğrafı:</label>
+        <input type="image" id="ImageUrl" name="ImageUrl"><br><br>*@
+        
+        <b><label>Ürün Fotoğrafı:</label></b>
+        <div class="custom-file" style="border: 2px solid grey">
+            <input class="form-control custom-file-input" type="file" id="ImageUrl" name="file" value="@Model.ImageUrl" />
+            <label class="custom-file-label">Seçiniz</label>
+        </div>
+        <br/>
+        <br/>
+
+        <b><label for="Description">Ürünün Açıklaması:</label></b>
+        <input type="text" id="Description" name="Description" value="@Model.Description" style="border: 2px solid grey"><br><br>
+
+
+        <b><label for="store">Mağaza Adı:</label></b>
+        <select name="groupid" id="groupid" style="border: 2px solid grey">
+            @foreach (var item in ViewBag.deger)
+            {
+                <option value="@item.groupid" >@item.groupname</option>
+            }
+        </select>
+        <br />
+        
+        <input type="text" id="Id" name="Id" style="visibility: hidden" @*disabled="disabled"*@ value="@Model.Id"><br><br>
+        @*<label for="KategoriId">Ürün Kategori Bilgisi:</label>
+            <select name="deneme2" id="dropdown2">
+                @foreach (var item in ViewBag.deger2)
+                {
+                    <option value="@item.KategoriID">@item.KategoriName</option>
+                }
+            </select>*@
+        @*<a href="/Product/ProductUpdate" class="btn btn-info" id="buttonn12" style="background-color: #84C639">Ürün Güncelle</a>*@
+        <button class="btn btn-info" id="buttonn1">Ürün Güncelle</button>
+        @*<button class="btn btn-info" id="buttonn3">Güncelle</button>*@
+        @*<a href="/Product/AdminAnasayfa" class="btn btn-danger">Geri</a>*@
+        <button class="btn btn-danger" id="buttonn12" @*style="background-color: #84C639"*@>Geri</button>
+    </div>
+</form>
+@*<script>
+    $(document).ready(function () {
+        var Id = @Model.Id;
+        //$("#dropdown").select2();
+        $("#buttonn3").click(function () {
+            debugger;
+        /*var Id = $('#Id').val();*/
+            var Name = $('#Name').val();
+            var Quantity = $('#Quantity').val();
+            var Price = $('#Price').val();
+            var ImageUrl = $('#ImageUrl').val();
+            var Description = $('#Description').val();
+            var dropvalue = $('#dropdown :selected').val();
+            //var dropvalue2 = $('#dropdown2 :selected').val();
+            $.ajax({
+                type: 'POST',
+                url: '/Products/ProductUpdate',
+                data: {
+                    Id: Id,
+                    Name: Name,
+                    Quantity: Quantity,
+                    Price: Price,
+                    ImageUrl: ImageUrl,
+                    Description: Description,
+                    groupId: dropvalue,
+/*                    kategoriID:dropvalue2*/
+                },
+                success: function (data) {
+                    debugger
+                    console.log('olduuuu')
+                    window.location.href = '@Url.Action("GetAllProduct","Products")'
+                },
+                error: function (data) {
+                    debugger
+                    console.log('')
+                }
+            });
+        });
+    });
+</script>*@

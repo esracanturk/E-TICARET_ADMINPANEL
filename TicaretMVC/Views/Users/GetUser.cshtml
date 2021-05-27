@@ -1,0 +1,104 @@
+﻿@model TicaretMVC.Models.Users
+@{
+    ViewData["Title"] = "GetUser";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+
+<br />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div>
+    <b><label for="username">Kullanıcı Adı:</label></b>
+    <input type="text" id="username" name="username" value="@Model.username"><br><br>
+
+    <b><label for="password">Kullanıcı Şifresi:</label></b>
+    <input type="password" id="password" name="password" value="@Model.password"><br><br>
+    
+    <b><label for="email">E-Mail</label></b>
+    <input type="text" id="email" name="email" value="@Model.email"><br><br>
+
+    <b><label for="role">Kullanıcı Rolü:</label></b>
+    <select name="deneme2" id="dropdown2">
+        @*@foreach (var item in ViewBag.deger2)
+            {*@
+        <option value=role>@ViewBag.deger1</option>
+        <option value=role>@ViewBag.deger2</option>
+        @*}*@
+    </select>
+    <br />
+    <br />
+
+    <button class="btn btn-info" id="buttonn">Kullanıcı Güncelle</button>
+    <a href="/Users/BackPage" class="btn btn-danger">Geri</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //$("#dropdown").select2();
+        var userid = @Model.userid
+        $("#buttonn").click(function () {
+            debugger;
+            //var userid = $('#userid').val();
+            @*var userid = @Model.userid;*@
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var email = $('#email').val();
+            var dropvalue = $('#dropdown :selected').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Users/UpdateUser',
+                    data: {
+                        userid:userid,
+                        username: username,
+                        password:password,
+                        email: email,
+                        role:dropvalue
+                    },
+                    /*data: '{groupid:' + dropvalue + ' }',*/
+                    success: function (data) {
+                        debugger
+                        console.log('olduuuu')
+                        window.location.href = '@Url.Action("Index","Users")'
+                    },
+                    error: function (data) {
+                        debugger
+                        console.log('')
+                    }
+                });
+            });
+        });
+</script>
+
+@*<br />
+    @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post))
+    {
+
+        <b>Kullanıcı ID</b>
+        @Html.TextBoxFor(x => x.userid, new { @class = "form-control" })
+        <br />
+
+        <b>Mağaza ID</b>
+        @Html.TextBoxFor(x => x.groupid, new { @class = "form-control" })
+        <br />*@
+
+@*<b>Departman Adı</b>
+    @Html.TextBoxFor(x => x.groupname, new { @class = "form-control" })
+    <br />*@
+
+@*<b>Kullanıcı Adı</b>
+        @Html.TextBoxFor(x => x.username, new { @class = "form-control" })
+        <br />
+
+        <b>Kullanıcı Şifresi</b>
+        @Html.TextBoxFor(x => x.password, new { @class = "form-control" })
+        <br />
+
+        <b>Kullanıcı Rolü</b>
+        @Html.TextBoxFor(x => x.role, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info" style="background-color:lightgray;color:black">Kullanıcı Güncelle</button>
+        <a href="/User/BackPage" class="btn btn-danger">Geri</a>
+    }*@
+

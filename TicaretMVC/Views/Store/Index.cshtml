@@ -1,0 +1,32 @@
+﻿@using TicaretMVC.Models
+@model List<Store>
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+<br />
+<h3>HOŞGELDİNİZ, @Context.Session.GetString("username")</h3>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Mağaza</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <th>@x.groupid</th>
+            <td>@x.groupname</td>
+            <td><a href="/Store/GetStore?groupid=@x.groupid&groupname=@x.groupname " class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Store/DetailStore?groupid=@x.groupid&groupname=@x.groupname" class="btn btn-default" style="background-color:#ffd800">Detaylar</a></td>
+            <td><a href="/Store/DeleteStore?groupid=@x.groupid" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Store/NewStore/" class="btn btn-primary">Yeni Mağaza</a>
+

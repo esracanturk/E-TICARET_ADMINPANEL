@@ -1,0 +1,65 @@
+﻿@model TicaretMVC.Models.Store
+@{
+    ViewData["Title"] = "GetStore";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+@*<br />*@
+@*@using (Html.BeginForm("UpdateStore", "Store", FormMethod.Post))
+    {
+        <b>Mağaza ID</b>
+        @Html.HiddenFor(x => x.groupid, new { @class = "form-control" })
+        <br />
+
+        <b>Mağaza Adı</b>
+        @Html.TextBoxFor(x => x.groupname, new { @class = "form-control" })
+        <br />
+
+        <button class="btn btn-info" style="background-color:lightgray;color:black">Mağaza Güncelle</button>
+        <a href="/Store/BackPage" class="btn btn-danger">Geri</a>
+    }*@
+
+<br />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div>
+    <b><label for="groupname">Mağaza Adı:</label></b>
+    <input type="text" id="groupname" name="groupname" value="@Model.groupname"><br><br>
+
+    <button class="btn btn-info" id="buttonn">Mağaza Güncelle</button>
+    <a href="/Store/BackPage" class="btn btn-danger">Geri</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        debugger;
+        //$("#dropdown").select2();
+        var groupid = @Model.groupid
+        $("#buttonn").click(function () {
+            debugger;
+            //var userid = $('#userid').val();
+            @*var userid = @Model.userid;*@
+            var groupname = $('#groupname').val();
+            $.ajax({
+                    type: 'POST',
+                url: '/Store/UpdateStore',
+                    data: {
+                        groupid:groupid,
+                        groupname: groupname,
+                    },
+                    /*data: '{groupid:' + dropvalue + ' }',*/
+                    success: function (data) {
+                        debugger
+                        console.log('olduuuu')
+                        window.location.href = '@Url.Action("Index","Store")'
+                    },
+                    error: function (data) {
+                        debugger
+                        console.log('')
+                    }
+                });
+            });
+        });
+</script>
+

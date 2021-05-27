@@ -1,0 +1,24 @@
+﻿@model TicaretMVC.Models.Store
+@{
+    ViewData["Title"] = "NewStore";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+<br />
+<form class="form-group" method="post">
+
+    @*<b>Departman ID</b>
+        @Html.LabelFor(x=>x.id)
+        @Html.TextBoxFor(x => x.groupid, new { @class = "form-control" })
+        <br />*@
+
+    <b>Mağaza Adı</b>
+    @*@Html.LabelFor(x=>x.Username)*@
+    @Html.TextBoxFor(x => x.groupname, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.groupname, "", new { @style = "color:red" })
+    <br />
+
+    <button class="btn btn-info">Mağaza Ekle</button>
+    <a href="/Store/BackPage" class="btn btn-danger">Geri</a>
+</form>
+
+

@@ -1,0 +1,49 @@
+﻿@using TicaretMVC.Models
+@model List<Users>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+<br />
+<h3>HOŞGELDİNİZ, @Context.Session.GetString("username")</h3>
+@*@using (Html.BeginForm())
+{
+    <label>Kullanıcı Ara:</label>
+    @Html.TextBox("ara")
+    <button>Ara</button>
+}*@
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Kullanıcılar</th>
+        <th>Roller</th>
+        <th>E-Mail</th>
+        <th>E-Mail Doğrulama</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <th>@x.userid</th>
+            <td>@x.username</td>
+            <td>@x.role</td>
+            <td>@x.email</td>
+            <td>@x.emailconfirm</td>
+            <td><a href="/Users/GetUser?userid=@x.userid&username=@x.username&passsword=@x.password&role=@x.role&email=@x.email&emailconfirm=@x.emailconfirm" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Users/DetailUser?userid=@x.userid&username=@x.username&role=@x.role" class="btn btn-default" style="background-color:#ffd800">Detaylar</a></td>
+            <td><a href="/Users/DeleteUser?userid=@x.userid" class="btn btn-danger">Sil</a></td>
+        </tr>
+        }
+
+</table>
+<a href="/Users/NewUser/" class="btn btn-primary">Yeni Kullanıcı</a>
+
+@*<h3>@Context.Session.GetString("username")</h3>*@
+
+
+
+

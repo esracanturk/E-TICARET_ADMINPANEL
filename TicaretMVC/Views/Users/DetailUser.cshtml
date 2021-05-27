@@ -1,0 +1,63 @@
+﻿@model TicaretMVC.Models.Users
+@{
+    ViewData["Title"] = "DetailUser";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+@*<table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Mağaza Adı</th>
+        </tr>
+        <tr>
+            <td>@Model.groupid</td>
+            <td>@Model.groupname</td>
+        </tr>
+
+    </table>*@
+
+<!DOCTYPE html>
+<html>
+<br />
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Kullanıcı Adı</th>
+            <th>Kullanıcı Rolü</th>
+            <th>E-Mail</th>
+            <th>E-Mail Doğrulama</th>
+        </tr>
+        <tr>
+            <th>@Model.userid</th>
+            <td>@Model.username</td>
+            <td>@Model.role</td>
+            <td>@Model.email</td>
+            <td>@Model.emailconfirm</td>
+        </tr>
+    </table>
+    <br />
+    <a href="/Users/BackPage/" class="btn btn-danger" style="position:absolute; top:160px; right: 815px">Geri</a>
+
+
+</body>
+</html>

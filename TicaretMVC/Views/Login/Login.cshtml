@@ -1,0 +1,204 @@
+﻿@model TicaretMVC.Models.Users
+<br />
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    var error = TempData["Error"] as string;
+    if (!string.IsNullOrEmpty(error))
+    {
+        <h2 class="alert-danger" style="padding: 20px;">@error</h2>
+    }
+    <b>Kullanıcı Adı</b>
+    @Html.TextBoxFor(x => x.username, new { @class = "form-control" })
+    <br />
+
+    <b>Şifre</b>
+    @Html.PasswordFor(x => x.password, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-info" style="background-color:lightgray;color:black">Giriş Yap</button>
+    <a href="/Login/Register" class="btn btn-info" style="background-color:lightcoral;color:black">Kayıt Ol</a>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kullanıcı Girişi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<script src="~/LoginScript/vendor/jquery/jquery-3.2.1.min.js"></script>*@
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/LoginScript/images/icons/favicon.ico" />
+    @*<img src="~/LoginScript/images/icons/favicon.ico" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/vendor/bootstrap/css/bootstrap.min.css">
+    @*<link href="~/LoginScript/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    @*<link href="~/LoginScript/fonts/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/fonts/iconic/css/material-design-iconic-font.min.css">
+    @*<link href="~/LoginScript/fonts/iconic/css/material-design-iconic-font.min.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/vendor/animate/animate.css">
+    @*<link href="~/LoginScript/vendor/animate/animate.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/vendor/css-hamburgers/hamburgers.min.css">
+    @*<link href="~/LoginScript/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/vendor/animsition/css/animsition.min.css">
+    @*<link href="~/LoginScript/vendor/animsition/css/animsition.min.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/vendor/select2/select2.min.css">
+    @*<link href="~/LoginScript/vendor/select2/select2.min.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/vendor/daterangepicker/daterangepicker.css">
+    @*<link href="~/LoginScript/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/css/util.css">
+    @*<link href="~/LoginScript/css/util.css" rel="stylesheet" />*@
+    <link rel="stylesheet" type="text/css" href="~/LoginScript/css/main.css">
+    @*<link href="~/LoginScript/css/main.css" rel="stylesheet" />*@
+    <!--===============================================================================================-->
+</head>
+</html>
+
+<!--!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" id="username" placeholder="Enter Username"
+               name="username"
+               required>
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" id="password" placeholder="Enter Password"
+               name="password" required>
+        <button id="buttonn" type="submit">Login</button>
+        <button class="btn btn-info"
+                id="buttonn">
+            Login
+        </button>
+        <a href="/Login/Register" class="btn btn-info" style="background-color:lightcoral;color:black">Kayıt Ol</a>
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+    </div>
+    <script>
+
+    $(document).ready(function () {
+        debugger;
+        $("#buttonn").click(function () {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            debugger;
+            //var username = $('#username').val();
+            //var password = $('#password').val();
+            $.ajax({
+                type: 'POST',
+                url: '/Login/Login',
+                data: { username: username, password: password },
+                success: function (data) {
+                    debugger;
+                    console.log('olduuuu')
+                    window.location.href = '@Url.Action("Index","Users")'
+                },
+                error: function (data) {
+                    debugger;
+                    console.log('olmadıııı')-->
+@*window.location.href = '@Url.Action("Error","Login")'*@
+<!--}
+            });
+        });
+    });
+    </script>
+</body>
+</html>-->

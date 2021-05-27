@@ -1,0 +1,80 @@
+﻿@model TicaretMVC.Models.Users
+
+<br />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<div class="col-10 m-2" style="border: 2px solid grey">
+    <br/>
+    <br/>
+    <b><label for="username">Kullanıcı Adı:</label></b>
+    <input type="text" id="username" name="username"><br><br>
+
+    @*<label for="userid">Kullanıcı ID:</label>
+        <input type="text" id="userid" name="userid"><br><br>*@
+
+    <b><label for="password">Kullanıcı Şifresi:</label></b>
+    <input type="password" id="password" name="password"><br><br>
+
+    <b><label for="email">E-Mail:</label></b>
+    <input type="email" id="email" name="email"><br><br>
+
+    <b><label for="role">Kullanıcı Rolü:</label></b>
+    @*<input type="text" id="role" name="role"><br><br>*@
+
+    <select name="deneme2" id="dropdown2">
+        @foreach (var item in ViewBag.deger2)
+        {
+            <option value="@item.role">@item.role</option>
+        }
+    </select>
+    <br/>
+    @*<input type="text" id="role" name="role"><br><br>*@
+    @*<button id="buton1">Buton1</button>*@
+    @*<label for="store">Mağaza Adı:</label>
+    <select name="deneme" id="dropdown">
+        @foreach (var item in ViewBag.deger)
+        {
+            <option value="@item.groupid">@item.groupname</option>
+        }
+    </select>*@
+    <br/>
+    <b><a href="/Login/Register" class="btn btn-info" id="buttonn" style="background-color: teal">Kayıt Ol</a></b>
+    <b><a href="/Login/BackPage" class="btn btn-danger">Geri</a></b>
+    <br/>
+    <br/>
+</div>
+
+<script>
+        $(document).ready(function () {
+            //$("#dropdown").select2();
+            $("#buttonn").click(function () {
+                debugger;
+                //var userid = $('#userid').val();
+                @*var userid = @Model.userid;*@
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var email = $('#email').val();
+                var dropvalue2 = $('#dropdown2 :selected').val();
+/*                var dropvalue = $('#dropdown :selected').val();*/
+                //var dropvalue2 = $('#dropdown2 :selected').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Login/Register',
+                    data: { /*userid: userid,*/ /*groupid: dropvalue,*/ username: username, password: password, role: dropvalue2,email:email },
+                    /*data: '{groupid:' + dropvalue + ' }',*/
+                    success: function (data) {
+                        debugger
+                        console.log('olduuuu')
+                        window.location.href = '@Url.Action("Login","Login")'
+                    },
+                    error: function (data) {
+                        debugger
+                        console.log('')
+                    }
+                });
+            });
+        });
+</script>

@@ -1,0 +1,75 @@
+﻿@model TicaretMVC.Models.Users
+@{
+    ViewData["Title"] = "NewUser";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+<br />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div>
+    <label for="username">Kullanıcı Adı:</label>
+    <input type="text" id="username" name="username"><br><br>
+
+    <label for="password">Kullanıcı Şifresi:</label>
+    <input type="password" id="password" name="password"><br><br>
+
+    <label for="role">Kullanıcı Rolü:</label>
+    <select name="deneme2" id="dropdown2">
+        @*@foreach (var item in ViewBag.deger2)
+        {*@
+        <option value=role>@ViewBag.deger1</option>
+        <option value=role>@ViewBag.deger2</option>
+        @*}*@
+    </select>
+    <br />
+    <br />
+
+    <label for="email">E-Mail</label>
+    <input type="email" id="email" name="email"><br><br>
+
+    @*<input type="text" id="role" name="role"><br><br>*@
+    @*<button id="buton1">Buton1</button>*@
+    @*<label for="store">Mağaza Adı:</label>
+    <select name="deneme" id="dropdown">
+        @foreach (var item in ViewBag.deger)
+        {
+            <option value="@item.groupid">@item.groupname</option>
+        }
+    </select>*@
+    <br />
+    <button class="btn btn-info" id="buttonn">Kullanıcı Ekle</button>
+    <a href="/Users/BackPage" class="btn btn-danger">Geri</a>
+</div>
+
+<script>
+        $(document).ready(function () {
+            //$("#dropdown").select2();
+            $("#buttonn").click(function () {
+                debugger;
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var email = $('#email').val();
+                var role = $('#role').val();
+                /*var dropvalue = $('#dropdown :selected').val();*/
+                var dropvalue2 = $('#dropdown2 :selected').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Users/NewUser',
+                    data: { /*groupid: dropvalue,*/ username: username, password: password, email:email,role: dropvalue2 },
+                    /*data: '{groupid:' + dropvalue + ' }',*/
+                    success: function (data) {
+                        debugger
+                        console.log('olduuuu')
+                        window.location.href = '@Url.Action("Index","Users")'
+                    },
+                    error: function (data) {
+                        debugger
+                        console.log('')
+                    }
+                });
+            });
+        });
+</script>
+
